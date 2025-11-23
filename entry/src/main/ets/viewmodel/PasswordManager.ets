@@ -2,7 +2,7 @@ import Password from './PasswordModel';
 
 @ObservedV2
 export class PasswordManager {
-  @Trace password: Password[] = [
+  @Trace inputList: Password[] = [
     new Password('Zyntra'),
     new Password('Lunovia'),
     new Password('Krynote'),

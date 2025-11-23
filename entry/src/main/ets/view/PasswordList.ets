@@ -1,4 +1,4 @@
-import Password from '../viewmodel/PasswordModel'
+import Input from '../viewmodel/PasswordModel'
 import { ArcList, ArcListItem, ArcListAttribute, router } from '@kit.ArkUI';
 import RandomNumberComponent from '../view/SecureRandomMock'
 import { PasswordManager } from '../viewmodel/PasswordManager';
@@ -11,14 +11,15 @@ export default struct PasswordList {
   build() {
     Flex({ justifyContent: FlexAlign.Center }) {
       ArcList() {
-        ForEach(PasswordManager.instance().password, (pwd: Password) => {
+        ForEach(PasswordManager.instance().inputList, (inp: Input) => {
           ArcListItem() {
             Column() {
-              Title({ title: pwd.account })
+              Title({ title: inp.account })
+
               RandomNumberComponent()
             }
           }
-        }, (pwd: Password) => JSON.stringify(pwd))
+        }, (inp: Input) => JSON.stringify(inp))
       }.width(this.listSize)
     }.width(this.watchSize)
     .height(this.watchSize)
@@ -29,12 +30,13 @@ export default struct PasswordList {
 struct Title {
   @Prop title: string;
   fontSize: number = 20;
+  @Consume('pathStack') pathStack: NavPathStack;
 
   build() {
     Row() {
       Text(this.title)
         .onClick(() => {
-          router.pushUrl({ url: 'pages/AddPassword' })
+          this.pathStack.pushPathByName('AddPassword', null)
         })
         .fontSize(this.fontSize)
         .fontWeight(FontWeight.Bold)

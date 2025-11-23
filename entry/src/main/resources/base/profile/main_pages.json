@@ -1,7 +1,5 @@
 {
   "src": [
-    "pages/Index",
-    "pages/Passwords",
-    "pages/AddPassword"
+    "pages/Index"
   ]
 }

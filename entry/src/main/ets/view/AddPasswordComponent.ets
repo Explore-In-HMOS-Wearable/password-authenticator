@@ -5,18 +5,19 @@ import { PasswordManager } from '../viewmodel/PasswordManager'
 @Component
 export default struct PasswordStack {
   @State newApp: string = ''
+  @Consume('pathStack') pathStack: NavPathStack;
 
   pushPassword() {
     if (this.newApp.trim() !== '') {
       const newPwd = new Password(this.newApp.trim())
-      PasswordManager.instance().password.push(newPwd)
+      PasswordManager.instance().inputList.push(newPwd)
       this.newApp = ''
     }
   }
 
   popPassword() {
-    if (PasswordManager.instance().password.length > 0) {
-      PasswordManager.instance().password.pop()
+    if (PasswordManager.instance().inputList.length > 0) {
+      PasswordManager.instance().inputList.pop()
     }
   }
 
@@ -27,13 +28,14 @@ export default struct PasswordStack {
       Button('Add').margin({ bottom: 15 }).backgroundColor(Color.Red)
         .onClick(() => {
           this.pushPassword()
-          router.back()
+          this.pathStack.pop()
+
         }
         )
       Button('Remove').backgroundColor(Color.Red)
         .onClick(() => {
           this.popPassword()
-          router.back()
+          this.pathStack.pop()
         })
     }
     .padding(20)

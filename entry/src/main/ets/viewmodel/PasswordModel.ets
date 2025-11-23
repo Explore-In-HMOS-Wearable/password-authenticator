@@ -1,4 +1,4 @@
-export default class Password {
+export default class Input {
   account: string = ''
 
   constructor(account: string) {

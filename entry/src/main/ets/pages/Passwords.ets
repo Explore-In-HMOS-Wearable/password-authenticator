@@ -1,11 +1,16 @@
 import PasswordList from '../view/PasswordList'
 
-@Entry
 @Component
-struct Passwords {
+export struct Passwords {
+  @Consume('pathStack') pathStack: NavPathStack;
+
   build() {
-    Column() {
-      PasswordList()
+    NavDestination() {
+      Column() {
+        PasswordList()
+      }
     }
+    .hideTitleBar(true)
+    .hideBackButton(true)
   }
 }

@@ -30,7 +30,7 @@ export default struct RandomNumberComponent {
 
   build() {
     Column() {
-      Progress({ value: this.seconds, total: 30, type: ProgressType.Ring, }).width(40)
+      Progress({ value: this.seconds, total: 30, type: ProgressType.Ring }).width(40)
         .style({ enableScanEffect: true }).color(Color.Red)
       Text('Your 6-digit random number:')
         .fontSize(12)

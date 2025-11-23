@@ -1,11 +1,16 @@
 import AddPasswordComponent from '../view/AddPasswordComponent'
 
-@Entry
 @Component
-struct AddPassword {
+export struct AddPassword {
+  @Consume('pathStack') pathStack: NavPathStack;
+
   build() {
-    Column() {
-      AddPasswordComponent()
+    NavDestination() {
+      Column() {
+        AddPasswordComponent()
+      }
     }
+    .hideTitleBar(true)
+    .hideBackButton(true)
   }
 }
