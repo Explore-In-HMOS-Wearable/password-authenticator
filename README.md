@@ -7,10 +7,10 @@ Password Authenticator is a demo app that generates time-based one-time passcode
 # Preview
 
 <p align="left">
-  <img src="images/GIFF.gif" width="24%">
-  <img src="images/img1.png" width="24%">
-  <img src="images/img2.png" width="24%">
-  <img src="images/img3.png" width="24%">
+  <img src="screenshots/img1.png" width="24%">
+  <img src="screenshots/img2.png" width="24%">
+  <img src="screenshots/img3.png" width="24%">
+  <img src="screenshots/GIFF.gif" width="24%">
 </p>
 
 # Use Cases

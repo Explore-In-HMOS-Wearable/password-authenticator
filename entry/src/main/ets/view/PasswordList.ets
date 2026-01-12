@@ -33,7 +33,6 @@ struct Title {
   @Consume('pathStack') pathStack: NavPathStack;
 
   build() {
-    Row() {
       Text(this.title)
         .onClick(() => {
           this.pathStack.pushPathByName('AddPassword', null)
@@ -42,6 +41,5 @@ struct Title {
         .fontWeight(FontWeight.Bold)
         .fontStyle(FontStyle.Italic)
         .margin({ top: 10 })
-    }
   }
 }

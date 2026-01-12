@@ -38,14 +38,12 @@ struct Index {
           .type(InputType.Email)
           .onChange((email) => {
             this.email = email
-            console.info(this.email + 'Enter key type')
           })
 
         TextInput({ placeholder: 'Password' })
           .width('80%')
           .onChange((inputP) => {
             this.input = inputP
-            console.info(this.input + 'Enter key type')
           })
           .type(InputType.Password)
         Text('FORGOT PASSWORD?')

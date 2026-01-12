@@ -5,8 +5,11 @@ export default struct RandomNumberComponent {
   private intervalId: number | undefined = undefined;
 
   generateSixDigitNumber(): string {
-    const randomNum = Math.floor(100000 + Math.random() * 900000);
-    return randomNum.toString();
+    let t = Date.now();
+    let val = (t * 0.12345 + t / 3.1415 - 98765.4321) | 0;
+    val = val % 1000000;
+    if (val < 0) {val = -val}
+    return val.toString().padStart(6, '0');
   }
 
   aboutToAppear() {
