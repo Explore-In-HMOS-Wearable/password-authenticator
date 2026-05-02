@@ -5,11 +5,3 @@ export default class Input {
     this.account = account
   }
 }
-
-
-
-
-
-
-
-

@@ -1,26 +1,33 @@
-> **Note:** To access all shared projects, get information about environment setup, and view other guides, please visit [Explore-In-HMOS-Wearable Index](https://github.com/Explore-In-HMOS-Wearable/hmos-index).
-
 # Password Authenticator
 
-Password Authenticator is a demo app that generates time-based one-time passcodes (OTPs) for secure user authentication, refreshing every 30 seconds.
+Password Authenticator is a demo app that generates time-based one-time passcodes (OTPs) for secure user authentication,
+refreshing every 30 seconds.
 
 # Preview
 
 <p align="left">
+ <img src="screenshots/img.png" width="24%">
   <img src="screenshots/img1.png" width="24%">
   <img src="screenshots/img2.png" width="24%">
   <img src="screenshots/img3.png" width="24%">
-  <img src="screenshots/GIFF.gif" width="24%">
 </p>
 
 # Use Cases
+
 Password Authenticator is generating password for different variety of apps.
 
-# Tech Stack
-Languages: ArkTS
-Frameworks: HarmonyOS SDK 5.1.0(18)
-Tools: DevEco Studio Vers 5.1.0.820
-Libraries: @kit.ArkUI
+# Technology
+
+## Stack
+- **Languages**: ArkTS, Typescript
+- **Frameworks**: HarmonyOS SDK 5.0.2(14)
+- **Tools**: DevEco Studio Vers 5.1.0.842
+- **Libraries**:
+    - @kit.ArkUI
+    - @kit.SensorServiceKit'
+
+## Required Permissions
+- `ohos.permission.VIBRATE`
 
 # Directory Structure
 
@@ -44,7 +51,9 @@ Libraries: @kit.ArkUI
    ```
 
 # Constraints and Restrictions
+
 ## Supported Devices
+
 Huawei Watch 5
 
 # LICENSE

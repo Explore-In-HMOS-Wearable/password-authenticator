@@ -2,7 +2,23 @@
   "color": [
     {
       "name": "start_window_background",
-      "value": "#FFFFFF"
+      "value": "#1A1A1A"
+    },
+    {
+      "name": "brand_primary",
+      "value": "#333333"
+    },
+    {
+      "name": "brand_secondary",
+      "value": "#666666"
+    },
+    {
+      "name": "input_bg",
+      "value": "#262626"
+    },
+    {
+      "name": "text_color",
+      "value": "#E0E0E0"
     }
   ]
 }

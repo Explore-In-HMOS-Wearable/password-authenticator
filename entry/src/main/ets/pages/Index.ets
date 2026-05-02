@@ -1,5 +1,6 @@
-import { router, PromptAction } from '@kit.ArkUI';
-import { BusinessError } from '@kit.BasicServicesKit'
+import { PromptAction } from '@kit.ArkUI';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { vibrator } from '@kit.SensorServiceKit';
 import { AddPassword } from './AddPassword';
 import { Passwords } from './Passwords';
 
@@ -14,6 +15,21 @@ struct Index {
   private correctInput: string = '';
   @Provide('pathStack') pathStack: NavPathStack = new NavPathStack()
 
+  private triggerVibration(isSuccess: boolean) {
+    try {
+      vibrator.startVibration({
+        type: 'preset',
+        effectId: isSuccess ? 'haptic.success' : 'haptic.fail',
+        count: 1
+      }, {
+        usage: 'notification'
+      });
+    } catch (error) {
+      let err = error as BusinessError;
+      console.error(`Vibration error: ${err.code} ${err.message}`);
+    }
+  }
+
   @Builder
   PageMap(name: string) {
     if (name === 'AddPassword') {
@@ -25,75 +41,74 @@ struct Index {
 
   build() {
     Navigation(this.pathStack) {
-      Flex({ wrap: FlexWrap.Wrap, alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceEvenly }) {
-
-        Text('WELCOME')
-          .width('35%')
-          .textAlign(TextAlign.Start)
-          .fontWeight(FontWeight.Bolder)
-
-        TextInput({ placeholder: 'E-mail' })
-          .width('80%')
-          .margin(10)
-          .type(InputType.Email)
-          .onChange((email) => {
-            this.email = email
-          })
-
-        TextInput({ placeholder: 'Password' })
-          .width('80%')
-          .onChange((inputP) => {
-            this.input = inputP
-          })
-          .type(InputType.Password)
-        Text('FORGOT PASSWORD?')
-          .margin(10)
-          .fontWeight(FontWeight.Bold)
-          .decoration({
-            type: TextDecorationType.Underline,
-            color: Color.Black
-          })
-        Button({ type: ButtonType.Normal, stateEffect: true }) {
-          Text('LOG IN')
-            .textAlign(TextAlign.Start)
-            .fontStyle(FontStyle.Normal)
+      Stack() {
+        Column({ space: 6 }) {
+          Text('LOGIN')
+            .fontSize(12)
             .fontWeight(FontWeight.Bold)
-        }
-        .width('90%')
-        .height(50)
-        .backgroundColor(Color.Black)
-        .onClick(() => {
-          try {
-            this.checkCredentials(this.email === this.correctEmail && this.input === this.correctInput)
+            .fontColor($r('app.color.text_color'))
+            .margin({ bottom: 4 })
 
-          } catch (error) {
-            let message = (error as BusinessError).message
-            let code = (error as BusinessError).code
-          }
-          ;
-        })
-      }.margin({ top: 20 })
+          TextInput({ placeholder: 'E-mail' })
+            .width('100%')
+            .height(30)
+            .fontSize(10)
+            .placeholderFont({ size: 10 })
+            .fontColor($r('app.color.text_color'))
+            .backgroundColor($r('app.color.input_bg'))
+            .borderRadius(4)
+            .onChange((val) => this.email = val)
+
+          TextInput({ placeholder: 'Password' })
+            .width('100%')
+            .height(30)
+            .fontSize(10)
+            .placeholderFont({ size: 10 })
+            .fontColor($r('app.color.text_color'))
+            .backgroundColor($r('app.color.input_bg'))
+            .borderRadius(4)
+            .type(InputType.Password)
+            .onChange((val) => this.input = val)
+
+          Text('Forgot?')
+            .fontSize(8)
+            .fontColor($r('app.color.brand_secondary'))
+            .alignSelf(ItemAlign.End)
+
+          Button('GO')
+            .width('100%')
+            .height(28)
+            .fontSize(10)
+            .borderRadius(4)
+            .backgroundColor($r('app.color.brand_primary'))
+            .fontColor($r('app.color.text_color'))
+            .onClick(() => {
+              this.checkCredentials(this.email === this.correctEmail && this.input === this.correctInput)
+            })
+        }
+        .width('60%')
+        .padding(12)
+        .backgroundColor($r('app.color.start_window_background'))
+        .borderRadius(8)
+        .border({ width: 1, color: '#333333' })
+      }
+      .width('100%')
+      .height('100%')
+      .backgroundColor('#121212')
     }
     .mode(NavigationMode.Stack)
     .hideTitleBar(true)
-    .hideBackButton(true)
     .navDestination(this.PageMap)
   }
 
   checkCredentials(isValid: boolean) {
+    this.triggerVibration(isValid);
+
     if (isValid) {
-      this.promptAction.showToast({
-        message: 'WELCOME',
-        duration: 2000
-      });
-
+      this.promptAction.showToast({ message: 'Success', duration: 1500 });
       this.pathStack.pushPathByName('Passwords', null)
-
     } else {
-      this.promptAction.showToast({
-        message: 'Invalid E-mail or Password',
-        duration: 2000
-      });
+      this.promptAction.showToast({ message: 'Failed', duration: 1500 });
     }
   }
 }
